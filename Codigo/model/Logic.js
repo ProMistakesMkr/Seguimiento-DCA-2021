@@ -29,8 +29,7 @@ class Logic {
     }
 
     draw() {
-        //FIRST SCREEN
-        switch (this.screen) {
+        switch (this.screen) { // Principal Screen
             case 0:
                 rectMode(CENTER);
                 noStroke();
@@ -58,7 +57,7 @@ class Logic {
                 rect(80, 600, 125, 50, 10);     //Add
                 rect(220, 600, 125, 50, 10);    //Delete
                 rect(360, 600, 125, 50, 10);    //Magnify
-                rect(500, 600, 125, 50, 10);    //Circle
+                rect(500, 600, 125, 50, 10);    //Circles
                 textSize(18);
                 text("Add", 60, 605);
                 text("Delete", 190, 605);
