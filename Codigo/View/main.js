@@ -1,4 +1,4 @@
-let Controller;
+let control;
 
 function setup(){
 createCanvas(800,800);

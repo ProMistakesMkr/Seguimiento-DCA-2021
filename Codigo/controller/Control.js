@@ -1,5 +1,5 @@
 let logic;
-class Controlller {
+class Control {
     constructor(app){
     this.app=app;
     logic=new Logic(this);
