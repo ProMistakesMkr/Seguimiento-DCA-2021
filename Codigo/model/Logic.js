@@ -1,160 +1,127 @@
-  
 class Logic {
-    
     constructor(app) {
         this.app = app;
-        
+        this.counter = 0;
+        this.screen = 0;
+        this.error = false;
+        this.size = 1;
         this.circleArray = [];
         this.square = [];
 
-        this.screen = 0;    //to use with switch
-        this.countNumb = 0;
-        this.tam = 1;
-
-        this.error = false;
-        this.drawElli = false;
-
         this.position = [];
-        this.position[0] = 10;
-        this.position[1] = 60;
-        this.position[2] = 110;
-        this.position[3] = 160;
-        this.position[4] = 210;
-        this.position[5] = 260;
-        this.position[6] = 310;
-        this.position[7] = 360;
-        this.position[8] = 410;
-        this.position[9] = 460;
-
+        this.position[0] = 50;
+        this.position[1] = 120;
+        this.position[2] = 190;
+        this.position[3] = 260;
+        this.position[4] = 330;
+        this.position[5] = 400;
+        this.position[6] = 470;
+        this.position[7] = 540;
+        this.position[8] = 610;
+        this.position[9] = 610;
+        this.paintEllipse = false;
     }
-
     draw() {
-        switch (this.screen) { // Principal Screen
+        switch (this.screen) {
             case 0:
-                rectMode(CENTER);
-                noStroke();
-                rect(300, 350, 75, 30);         //Number
-                rect(240, 350, 30, 30, 5);      //-
-                rect(360, 350, 30, 30, 5);      //+
-                rect(300, 390, 150, 30 , 5);    //Continue
-               
-                textSize(18);
-                text(this.countNumb, 293, 358);
-                text("Continue", 260, 397);
-                text("+", 355, 357);
-                text("-", 237, 357);
-
+                background(155);
+                textSize(20);
+                rect(200, 450, 50, 20);
+                rect(165, 450, 20, 20);
+                rect(265, 450, 20, 20);
+                rect(178, 475, 90, 20);
+                text("Continuar", 180, 493);
+                text(this.counter, 220, 468);
+                text("+", 270, 467);
+                text("-", 172, 465);
                 textSize(20);
                 if (this.error) {
-                    text("ERROR, please try with other number", 170, 250);
+                    text("ERROR. O no valid number", 50, 50);
                 }
                 break;
-       
-        //SECOND SCREEN
             case 1:
-                rectMode(CENTER);
-                noStroke();
-                rect(80, 600, 125, 50, 10);     //Add
-                rect(220, 600, 125, 50, 10);    //Delete
-                rect(360, 600, 125, 50, 10);    //Magnify
-                rect(500, 600, 125, 50, 10);    //Circles
-                textSize(18);
-                text("Add", 60, 605);
-                text("Delete", 190, 605);
-                text("Magnify", 330, 605);
-                text("Circles", 470, 605);
-                
-                for (let i = 0; i < this.square.length; i++) {
-                    this.square[i].drawSquare((50 * i) + 45, 40 * this.tam);
-                    this.square[i].moveSquare();
-                }
+                background(255);
 
-                if (this.drawElli) {
+                rect(120, 449, 125, 50);
+                rect(290, 449, 125, 50);
+                rect(460, 449, 125, 50);
+                rect(630, 449, 125, 50);
+                text("Agregar", 140, 480);
+                text("Quitar", 300, 480);
+                text("Agrandar", 470, 480);
+                text("Circulos", 640, 480);
+
+                for (let i = 0; i < this.square.length; i++) {
+                    this.square[i].drawFigure((70 * i) + 70, 50 * this.size);
+                    this.square[i].move();
+                }
+                if (this.paintEllipse) {
                     for (let i = 0; i < this.circleArray.length; i++) {
-                        this.circleArray[i].drawCircle((50 * i) + 45, 40 * this.tam);
-                        this.circleArray[i].moveCircle();
+                        this.circleArray[i].drawFigure((70 * i) + 70, 50 * this.size);
+                        this.circleArray[i].move();
                     }
                 }
-            break;   
+                break;
         }
     }
-    
-
     mouse() {
         switch (this.screen) {
             case 0:
-                if (mouseX >= 225 && mouseX <= 255 && 
-                    mouseY >= 335 && mouseY <= 365 && 
-                    this.countNumb > 0) {
-                    this.countNumb -= 1;
+                if (mouseX >= 265 && mouseX <= 265 + 20 && mouseY >= 450 && mouseY <= 450 + 20 && this.counter < 10) {
+                    this.counter += 1;
                 }
-                if (mouseX >= 345 && mouseX <= 375 &&
-                    mouseY >= 335 && mouseY <= 365 && 
-                    this.countNumb < 10) {
-                    this.countNumb += 1;
+                if (mouseX >= 165 && mouseX <= 165 + 20 && mouseY >= 450 && mouseY <= 450 + 20 && this.counter > 0) {
+                    this.counter -= 1;
                 }
-                if (mouseX >= 225 && mouseX <= 375 && 
-                    mouseY >= 375 && mouseY <= 404 && 
-                    this.countNumb > 0 && this.countNumb <= 10) {
+                if (mouseX >= 178 && mouseX <= 178 + 90 && mouseY >= 475 && mouseY <= 475 + 20 && this.counter > 0 && this.counter <= 10) {
                     this.screen = 1;
-                    for (let i = 0; i < this.countNumb; i++) {
-                        this.square.push(new Square(50, this.position[this.pos], this.countNumb, this.tam))
-                        console.log(this.countNumb);
+                    for (let i = 0; i < this.counter; i++) {
+                        this.square.push(new Square(this.position[this.pos], 100, this.counter, this.size))
+                        console.log(this.counter);
                     }
                 }
-                if (mouseX >= 225 && mouseX <= 375 &&
-                    mouseY >= 375 && mouseY <= 405 && 
-                    this.countNumb == 0) {
+                if (mouseX >= 178 && mouseX <= 178 + 90 && mouseY >= 475 && mouseY <= 475 + 20 && this.counter == 0) {
                     this.error = true;
                 }
                 break;
-
-            case 1: 
-             if (mouseX >= 18 && mouseX <= 142 && 
-                 mouseY >= 590 && mouseY <= 610) {
-                    console.log("Add");
+            case 1:
+                if (mouseX >= 120 && mouseX <= 120 + 125 && mouseY >= 449 && mouseY <= 449 + 50) {
+                    console.log("agregar");
                     if (this.square.length >= 0 && this.square.length < 10) {
-                        this.square.push(new Square(50, this.position[this.pos], this.countNumb, this.tam));
+                        this.square.push(new Square(this.position[this.pos], 100, this.counter, this.size));
                     }
                 }
-
-             if (mouseX >= 158 && mouseX <= 282 && 
-                 mouseY >= 590 && mouseY <= 610) {
-                    console.log("Delete");
+                if (mouseX >= 290 && mouseX <= 290 + 125 && mouseY >= 449 && mouseY <= 449 + 50) {
+                    console.log("Quitar");
                     if (this.square.length > 1) {
                         this.square.splice(0, 1);
                     }
                 }
-
-            if (mouseX >= 298 && mouseX <= 422 && 
-                mouseY >= 590 && mouseY <= 610) {
-                    console.log("Magnify");
+                if (mouseX >= 460 && mouseX <= 460 + 125 && mouseY >= 449 && mouseY <= 449 + 50) {
                     this.square.forEach(element => {
-                        this.tam = 2;});
+                        this.size = 2;
+                    });
                 }
+                if (mouseX >= 630 && mouseX <= 630 + 125 && mouseY >= 449 && mouseY <= 449 + 50) {
 
-            if (mouseX >= 438 && mouseX <= 562 && 
-                mouseY >= 590 && mouseY <= 610) {
-                    console.log("Circle");
                     this.circleArray = this.square.map(function (x) {
-                        return x = new Circle(50, 50 * x.pos, x.getValue, x.tam); })
-                        this.drawElli = true;
+                        return x = new Circle(70 * x.pos, 300, x.getValor, x.size);
+                    })
+                    this.paintEllipse = true;
                 }
-                 break;
-            }
+                break;
+        }
     }
-
-
-     key() {
+    key() {
         if (keyCode === 78) {
             this.square.sort(function (a, b) {
-                return a.getValue() - b.getValue();
-            });
 
+                return a.getValor() - b.getValor();
+            });
             this.circleArray.sort(function (a, b) {
-                return a.getValue() - b.getValue();
+
+                return a.getValor() - b.getValor();
             });
         }
     }
-
 }

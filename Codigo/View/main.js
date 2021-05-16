@@ -1,22 +1,18 @@
-let controller;
+let Controller;
 
 function setup(){
-    createCanvas(600,600);
-    controller= new Controller(this);
+createCanvas(800,800);
+control=new Control(this);
 }
-
 
 function draw(){
-    background(254, 173, 93);
-    controller.draw();
+    background(155);
+    control.draw();
 }
-
 
 function mouseClicked(){
-    controller.mouse();
+    control.mouse();
 }
-
-
 function keyPressed(){
-    controller.key();
+    control.key(); 
 }

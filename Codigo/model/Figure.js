@@ -1,9 +1,8 @@
-  
 class Figure {
-    constructor(x, y, number, tam) {
+    constructor(x, y, number, size) {
         this.x = x;
         this.y = y;
         this.number = number;
-        this.tam = tam;
+        this.size = size;
     }
 }

@@ -1,33 +1,24 @@
 class Square extends Figure {
-   
-    constructor(x, y, number, tam) {
-      super(x, y, number, tam);
-      
-        this.speed = random(1, 3);
-        this.value = int(random(1, 10));
+    constructor(x, y, number, size) {
+        super(x, y, number, size);
+        this.velocidad = random(1, 3);
+        this.valor = int(random(1, 10));
     }
 
-
-    drawSquare(posY, tam) {
-       rect(this.x, posY, tam, tam);
-       text(this.value, this.x, posY);
+    drawFigure(posX, size) {
+        rect(posX, this.y, size, size);
+        text(this.valor, posX + 20, this.y + 30);
     }
-
-
-    moveSquare() {
-        this.x += this.speed;
-        if (this.x > 590 || this.x < 10) { 
-            this.speed = -this.speed; //change direction
+    move() {
+        this.y += this.velocidad;
+        if (this.y > 184 - 50 || this.y < 0) {
+            this.velocidad = -this.velocidad;
         }
     }
-
-
-    getValue() {
-        return this.value;
+    getValor() {
+        return this.valor;
     }
-
-
-    setTam(tam) {
-        this.tam = tam;
+    setSize(size) {
+        this.size = size;
     }
 }
