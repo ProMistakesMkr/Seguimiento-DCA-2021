@@ -7,7 +7,7 @@ class Logic {
         this.size = 1;
         this.circleArray = [];
         this.square = [];
-
+//declaración de las posiciones en el array
         this.position = [];
         this.position[0] = 50;
         this.position[1] = 120;
@@ -22,7 +22,7 @@ class Logic {
         this.paintEllipse = false;
     }
     draw() {
-        switch (this.screen) {
+        switch (this.screen) { 
             case 0:
                 background(155);
                 textSize(20);
@@ -112,6 +112,7 @@ class Logic {
                 break;
         }
     }
+    //números que van dentro de las figuras
     key() {
         if (keyCode === 78) {
             this.square.sort(function (a, b) {
